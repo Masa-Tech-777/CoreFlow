@@ -1,7 +1,16 @@
 CoreFlow
 ============================================================
 
+Free CPU Power Management Utility for Windows 11
+
 Manage CPU frequency limits and turbo/boost behavior with simple, straightforward controls.
+
+Developed by MasaTech / Itachi, Spica and Mahiru
+
+
+============================================================
+1. INTRODUCTION
+============================================================
 
 CoreFlow is a free CPU power-management utility for Windows 11, supporting Intel CPUs and AMD Ryzen CPUs.
 
@@ -13,12 +22,113 @@ CoreFlow automatically detects the CPU model. When the model exactly matches an 
 
 CoreFlow is intended for users who want to adjust CPU performance, heat generation, and power-management behavior according to their system and usage requirements.
 
+The application does not directly control CPU voltage, change BIOS settings, or perform overclocking.
+
+Instead, it applies settings through Windows power management and allows Windows and the CPU to manage actual operating frequencies.
+
 CoreFlow is completely free to use.
+
 No license key, activation, or trial period is required.
 
 
 ============================================================
-1. MAIN FEATURES
+2. PRODUCT RENAMING AND FREE RELEASE
+============================================================
+
+[2-1. From Astra CPU Silencer Standard to CoreFlow]
+
+The application previously distributed as:
+
+Astra CPU Silencer Standard
+
+has been renamed to:
+
+CoreFlow
+
+This change represents more than a product rename.
+
+CoreFlow builds on the development and testing performed during the Astra CPU Silencer project, while adopting a revised approach to CPU frequency management and software distribution.
+
+The previous Astra CPU Silencer Standard edition included a trial period and license activation.
+
+CoreFlow is now distributed as free software without those requirements.
+
+The new name also reflects the application's focus on managing CPU power and performance behavior through Windows power-management features.
+
+
+[2-2. Why CoreFlow Is Now Free]
+
+During development and testing, we investigated how Windows manages CPU operating frequencies, processor performance states, and turbo/boost behavior.
+
+We observed that the results of CPU frequency control can differ depending on the selected Windows power plan and the PC's hardware and software configuration.
+
+Even when identical frequency settings are applied, actual CPU behavior may vary.
+
+Windows manages processor performance through several mechanisms, including:
+
+- Windows power plans
+- Processor performance policies
+- CPU performance-state control
+- CPU firmware
+- BIOS settings
+- Manufacturer-specific power-management features
+- Thermal and electrical power limits
+
+These mechanisms can affect how frequency limits and boost settings are interpreted and applied.
+
+As a result, it is not possible to guarantee identical CPU frequency behavior across all supported systems.
+
+After reviewing these limitations, we decided to redesign the free edition around a defined maximum-frequency input range.
+
+Within that range, users can adjust CPU power-management settings according to their own environment.
+
+We also decided to make CoreFlow available without license fees or trial restrictions.
+
+Our goal is to provide an accessible utility that allows users to explore CPU power-management settings without requiring a purchase.
+
+
+[2-3. Frequency Management Philosophy]
+
+CoreFlow uses Windows power-management settings to request a maximum CPU frequency limit.
+
+Rather than attempting to force the CPU to operate at one fixed clock speed, CoreFlow allows Windows and the CPU to manage operating frequency within the applicable power-management constraints.
+
+For CPUs verified by the embedded specification database, the free edition uses a manual maximum-frequency input ceiling based on the CPU's rated maximum frequency minus 1200 MHz.
+
+This restriction defines the available manual input range in CoreFlow.
+
+It does not mean that the CPU is permanently limited to that frequency.
+
+Users can also select 0 MHz for Maximum Frequency.
+
+A value of 0 MHz means that no maximum-frequency cap is requested through that Windows setting.
+
+This allows Windows and the CPU to manage operating frequency without an additional maximum-frequency restriction imposed by CoreFlow.
+
+However, other Windows, CPU, firmware, thermal, and power-management limitations remain effective.
+
+CoreFlow does not guarantee that the CPU will reach its highest advertised frequency.
+
+
+[2-4. Differences from the Previous Astra Edition]
+
+CoreFlow differs from Astra CPU Silencer Standard in several important ways.
+
+- The product name is now CoreFlow.
+- CoreFlow is free to use.
+- License registration is no longer required.
+- The previous 60-minute trial restriction has been removed.
+- Maximum-frequency manual input limits have been revised.
+- The free edition uses a ceiling based on the verified CPU's rated maximum frequency minus 1200 MHz.
+- The application remains focused on Windows CPU power-management controls.
+
+Some settings and features available in the previous Astra edition may differ from those in CoreFlow.
+
+Users upgrading from Astra CPU Silencer Standard should review the new frequency restrictions and operating instructions before applying settings.
+
+
+============================================================
+3. MAIN FEATURES
 ============================================================
 
 CoreFlow provides the following features:
@@ -34,7 +144,7 @@ CoreFlow provides the following features:
 - Built-in update checking
 - Diagnostic log saving
 
-CoreFlow changes CPU power-management settings through standard Windows features.
+CoreFlow changes CPU power-management settings through standard Windows mechanisms.
 
 It does not use a custom kernel driver or directly modify CPU voltage, CPU multipliers, or BIOS settings.
 
@@ -46,7 +156,7 @@ It is not an overclocking utility.
 
 
 ============================================================
-2. SUPPORTED ENVIRONMENT
+4. SUPPORTED ENVIRONMENT
 ============================================================
 
 Supported operating system:
@@ -69,15 +179,32 @@ Usage time limit:
 None
 
 
+[Windows 10 Compatibility]
+
 Windows 10 may work, but it is not officially supported.
 
-Actual behavior may vary depending on the CPU, BIOS, firmware, Windows power-management configuration, and manufacturer-specific power-management features.
+Official support is provided for Windows 11.
+
+
+[System Compatibility]
+
+Actual behavior may vary depending on:
+
+- CPU model and architecture
+- BIOS and firmware
+- Windows version
+- Windows power plans
+- CPU performance-control mechanisms
+- Manufacturer-specific power-management features
+- System cooling and thermal conditions
 
 Even systems using the same CPU model may behave differently.
 
+CoreFlow cannot guarantee identical results across all PC configurations.
+
 
 ============================================================
-3. FREQUENCY LIMITS IN THE FREE EDITION
+5. FREQUENCY LIMITS IN THE FREE EDITION
 ============================================================
 
 CoreFlow includes input restrictions for maximum and minimum CPU frequency settings.
@@ -87,9 +214,9 @@ These restrictions define the values that can be entered through the application
 They do not guarantee that the CPU will operate continuously at the entered frequency.
 
 
-[3-1. Maximum Frequency Input Limit]
+[5-1. Maximum Frequency Input Limit]
 
-Maximum frequency values use 100 MHz increments.
+Maximum-frequency values use 100 MHz increments.
 
 CoreFlow identifies the CPU model and compares it with its embedded CPU specification database.
 
@@ -126,20 +253,28 @@ The actual available input range is determined by CoreFlow and should be confirm
 All frequency inputs use 100 MHz increments.
 
 
-[3-2. Maximum Frequency: 0 MHz]
+[5-2. Maximum Frequency: 0 MHz]
 
 Setting Maximum Frequency to 0 MHz means Unlimited.
 
 A value of 0 MHz does not stop the CPU or force it to operate at 0 MHz.
 
-It indicates that no maximum-frequency cap is being requested through this setting.
+Instead, it indicates that no maximum-frequency cap is being requested through this Windows power-management setting.
 
-Unlimited does not mean the CPU will always operate at its highest rated frequency.
+When 0 MHz is selected, CoreFlow does not impose an additional maximum-frequency restriction through that setting.
 
-Actual CPU clock speed continues to depend on workload, temperature, power limits, and Windows power management.
+Windows and the CPU can then manage operating frequencies according to the system's normal power-management behavior.
+
+This is useful when users want to remove the maximum-frequency cap previously configured through CoreFlow.
+
+However, Unlimited does not mean that the CPU will always operate at its highest rated frequency.
+
+It also does not remove other restrictions imposed by Windows, BIOS, firmware, temperature, electrical power limits, or manufacturer-specific controls.
+
+Actual CPU clock speed continues to depend on system conditions.
 
 
-[3-3. CPUs Not Found in the Database]
+[5-3. CPUs Not Found in the Database]
 
 CoreFlow uses exact CPU model matching.
 
@@ -152,7 +287,7 @@ If your CPU cannot be verified, set Maximum Frequency to 0 MHz (Unlimited).
 This avoids relying on an unverified frequency specification.
 
 
-[3-4. Minimum Frequency Input Limit]
+[5-4. Minimum Frequency Input Limit]
 
 The minimum-frequency input floor in the free edition is normally 1400 MHz.
 
@@ -167,7 +302,7 @@ For example, entering 1400 MHz does not guarantee that the CPU will always opera
 Windows and CPU power-management mechanisms may produce different observed clock speeds.
 
 
-[3-5. Maximum and Minimum Frequency Settings]
+[5-5. Maximum and Minimum Frequency Settings]
 
 Maximum Frequency and Minimum Frequency have different purposes.
 
@@ -180,7 +315,7 @@ The two settings are not identical types of control.
 Always use the input ranges displayed by CoreFlow.
 
 
-[3-6. Entered Values and Actual CPU Clock Speeds]
+[5-6. Entered Values and Actual CPU Clock Speeds]
 
 The frequency values entered in CoreFlow do not lock the processor to those exact clock speeds.
 
@@ -199,7 +334,7 @@ CPU monitoring software may report clock frequencies that differ from the values
 
 
 ============================================================
-4. BASIC USAGE
+6. BASIC USAGE
 ============================================================
 
 [Step 1: Launch CoreFlow]
@@ -257,7 +392,7 @@ Adjust settings according to your requirements and observed system behavior.
 
 
 ============================================================
-5. MAXIMUM CPU FREQUENCY
+7. MAXIMUM CPU FREQUENCY
 ============================================================
 
 Maximum Frequency is a Windows CPU power-management setting that specifies an upper frequency limit.
@@ -294,7 +429,7 @@ It does not directly modify CPU voltage, multipliers, or BIOS overclocking param
 
 
 ============================================================
-6. MINIMUM CPU FREQUENCY
+8. MINIMUM CPU FREQUENCY
 ============================================================
 
 CoreFlow uses the Windows "Minimum processor state (%)" setting for minimum processor performance control.
@@ -311,7 +446,7 @@ Minimum Frequency should therefore be understood as a processor-performance sett
 
 
 ============================================================
-7. TURBO BOOST AND BOOST MODES
+9. TURBO BOOST AND BOOST MODES
 ============================================================
 
 Boost-capable processors may temporarily operate above their nominal or base frequency when workload, temperature, power, and other conditions allow.
@@ -321,7 +456,7 @@ CoreFlow uses the Windows "Processor Performance Boost Mode" setting to configur
 Boost policies can determine whether boost is permitted and how aggressively Windows requests additional performance.
 
 
-[7-1. Processor Performance Boost Mode Values]
+[9-1. Processor Performance Boost Mode Values]
 
 Windows defines the following boost-policy values.
 
@@ -362,12 +497,12 @@ An efficiency-aware boost-request policy referenced to the CPU's guaranteed perf
 
 Note:
 
-The descriptions above are based on the Windows boost-policy values documented in the previous Astra edition.
+These boost-policy descriptions are based on the Windows settings documented in the previous Astra edition.
 
 The modes actually available in the current CoreFlow edition should be checked in the application interface.
 
 
-[7-2. Important Boost Mode Information]
+[9-2. Important Boost Mode Information]
 
 Boost Mode does not lock the CPU to a fixed clock frequency.
 
@@ -387,7 +522,7 @@ Entered MHz values do not guarantee exact operating frequencies.
 
 
 ============================================================
-8. SEPARATE AC AND DC SETTINGS
+10. SEPARATE AC AND DC SETTINGS
 ============================================================
 
 CoreFlow supports separate CPU power-management settings for AC and DC operation.
@@ -414,7 +549,7 @@ CoreFlow does not guarantee a particular improvement in battery runtime.
 
 
 ============================================================
-9. WINDOWS POWER PLANS
+11. WINDOWS POWER PLANS
 ============================================================
 
 CoreFlow changes CPU power-management settings stored in Windows power plans.
@@ -428,8 +563,69 @@ Always check which power plan is currently active.
 Windows updates and manufacturer-specific power-management software may also affect system power behavior.
 
 
+[11-1. Differences Between Power Plans]
+
+CPU frequency and boost-control behavior can vary depending on the active Windows power plan.
+
+Even when similar values are configured, the actual response may differ because of processor performance policies or other power-management settings associated with the plan.
+
+CPU architecture, BIOS, firmware, and manufacturer-specific controls can also influence the results.
+
+This is one of the reasons CoreFlow adopts a defined frequency-input range rather than guaranteeing the same clock behavior across every PC.
+
+
+[11-2. Changes in Windows Power Management]
+
+Windows processor performance is managed through multiple policies and hardware interfaces.
+
+The results of frequency and boost settings can change depending on Windows configuration, processor architecture, and supported power-management mechanisms.
+
+CoreFlow applies its settings through Windows rather than bypassing these mechanisms.
+
+Consequently, the application cannot override every frequency or performance restriction imposed by the operating system or the hardware.
+
+
 ============================================================
-10. CPU SPECIFICATION DATABASE
+12. MICROSOFT PROCESSOR POWER MANAGEMENT DOCUMENTATION
+============================================================
+
+Microsoft provides official documentation describing Windows processor power management.
+
+These documents explain available processor performance policies, maximum-frequency settings, and boost-mode behavior.
+
+They can help users understand why CPU operating frequencies may differ from configured values.
+
+
+[Processor Power Management]
+
+Microsoft documentation covering Windows processor power-management options:
+
+https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configure-processor-power-management-options
+
+
+[Maximum Processor Frequency]
+
+Microsoft documentation covering the maximum processor frequency setting:
+
+https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-maxfrequency
+
+
+[Processor Performance Boost Mode]
+
+Microsoft documentation covering processor boost policies:
+
+https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode
+
+
+These references describe Windows power-management mechanisms.
+
+They do not establish that every Windows 11 system has one identical or universal CPU clock-speed restriction.
+
+Actual processor behavior depends on the system configuration and supported control methods.
+
+
+============================================================
+13. CPU SPECIFICATION DATABASE
 ============================================================
 
 CoreFlow includes an embedded CPU specification database.
@@ -466,11 +662,11 @@ CPU model verification does not require an Internet connection.
 
 For CPUs verified through exact database matching, CoreFlow uses the CPU's rated maximum frequency minus 1200 MHz as the reference for the manual maximum-frequency input ceiling.
 
-For details, see Section 3.
+For details, see Section 5.
 
 
 ============================================================
-11. RESTORING ORIGINAL SETTINGS
+14. RESTORING ORIGINAL SETTINGS
 ============================================================
 
 If you want to undo changes made by CoreFlow, use [Restore Original Settings].
@@ -495,7 +691,7 @@ Its purpose is to restore the Windows power-management settings previously saved
 
 
 ============================================================
-12. VERSION INFORMATION
+15. VERSION INFORMATION
 ============================================================
 
 You can check the installed CoreFlow version through:
@@ -506,7 +702,7 @@ When requesting support, please check the version of CoreFlow you are using.
 
 
 ============================================================
-13. UPDATES
+16. UPDATES
 ============================================================
 
 CoreFlow provides an update-checking function through the Help menu.
@@ -523,7 +719,7 @@ CPU specification database lookup itself does not require Internet access.
 
 
 ============================================================
-14. DIAGNOSTIC LOGS
+17. DIAGNOSTIC LOGS
 ============================================================
 
 CoreFlow provides diagnostic logging to assist with troubleshooting and support.
@@ -557,7 +753,7 @@ CoreFlow does not require license keys or license registration.
 
 
 ============================================================
-15. UNINSTALLING COREFLOW
+18. UNINSTALLING COREFLOW
 ============================================================
 
 CoreFlow does not use a dedicated uninstaller.
@@ -578,7 +774,7 @@ If you want your previous settings restored, perform the restore operation befor
 
 
 ============================================================
-16. DISTRIBUTION FILES AND THIRD-PARTY SOFTWARE
+19. DISTRIBUTION FILES AND THIRD-PARTY SOFTWARE
 ============================================================
 
 Extract the entire distribution ZIP before launching the executable.
@@ -612,9 +808,11 @@ When distributing the package, retain the required license materials and the com
 
 We sincerely thank the authors and developers of AutoHotkey and the other third-party software components used by this project.
 
+We also acknowledge the contributions of the third-party software authors whose work supports the application's distribution and operation.
+
 
 ============================================================
-17. IMPORTANT NOTES
+20. IMPORTANT NOTES
 ============================================================
 
 CoreFlow changes Windows CPU power-management settings using standard Windows mechanisms.
@@ -649,7 +847,7 @@ Use settings appropriate for your system and verify behavior after applying chan
 
 
 ============================================================
-18. DISCLAIMER AND COMPATIBILITY
+21. DISCLAIMER AND COMPATIBILITY
 ============================================================
 
 CoreFlow modifies Windows CPU power-management settings.
@@ -666,7 +864,7 @@ Applicable third-party license rights and warranty terms remain governed by thei
 
 
 ============================================================
-19. COREFLOW AND COREFLOW EXTREME
+22. COREFLOW AND COREFLOW EXTREME
 ============================================================
 
 CoreFlow is a free CPU power-management utility.
@@ -683,7 +881,7 @@ For information about CoreFlow Extreme and its available settings, refer to the 
 
 
 ============================================================
-20. DEVELOPMENT AND SUPPORT
+23. DEVELOPMENT AND SUPPORT
 ============================================================
 
 Developed by:
@@ -698,5 +896,5 @@ https://masatech.booth.pm/
 
 ============================================================
 CoreFlow
-Windows 11 CPU Power-Management Utility
+Free CPU Power Management Utility for Windows 11
 ============================================================
